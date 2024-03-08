@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000") // Adjust the origin to match your React app's URL
 public class UserController {
 
     @Autowired
