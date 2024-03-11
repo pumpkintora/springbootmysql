@@ -1,4 +1,4 @@
-package com.rk.springbootmysql.model;
+package com.rk.springbootmysql.model.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
