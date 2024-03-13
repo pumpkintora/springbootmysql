@@ -1,10 +1,16 @@
 package com.rk.springbootmysql.service;
 
+import com.rk.springbootmysql.repository.UserRepository;
 import com.rk.springbootmysql.model.user.User;
 
 public class UserServiceImpl implements UserService{
+
+    private UserRepository userRepo;
+
     @Override
     public User signup(User user) {
+
+
         return null;
     }
 
