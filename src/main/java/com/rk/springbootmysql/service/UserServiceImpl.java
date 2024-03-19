@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
                     .setPassword(bCryptPasswordEncoder.encode(user.getPassword()))
                     .setUsername(user.getUsername())
                     .setTelephoneMobile(user.getTelephoneMobile());
-            return user;
+            return userRepo.save(user);
         }
         return null;
     }
