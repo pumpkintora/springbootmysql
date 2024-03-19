@@ -31,11 +31,16 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    private String password;
+
     @Column(name = "telephone_mobile")
     private String telephoneMobile;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @JoinTable(
+            name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Collection<Role> roles;
 }
 
