@@ -1,5 +1,6 @@
 package com.rk.springbootmysql.service;
 
+import com.rk.springbootmysql.dto.SignUpRequest;
 import com.rk.springbootmysql.repository.UserRepository;
 import com.rk.springbootmysql.model.user.User;
 import com.rk.springbootmysql.model.user.Role;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @Component
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -21,17 +22,17 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepo;
 
     @Override
-    public User signup(User user) {
-        User checkUser = userRepo.findByEmail(user.getEmail());
-        if (checkUser == null) {
-            user = new User()
-                    .setEmail(user.getEmail())
-                    .setPassword(bCryptPasswordEncoder.encode(user.getPassword()))
-                    .setUsername(user.getUsername())
-                    .setTelephoneMobile(user.getTelephoneMobile());
-            return userRepo.save(user);
+    public void signup(SignUpRequest request) throws Exception {
+        User checkUser = userRepo.findByEmail(request.email());
+        if (checkUser != null) {
+            throw new Exception(String.format("User with the email address '%s' already exists.", request.email()));
         }
-        return null;
+        User newUser = new User()
+                .setEmail(request.email())
+                .setPassword(bCryptPasswordEncoder.encode(request.password()))
+                .setUsername(request.username())
+                .setTelephoneMobile(request.telephoneMobile());
+        userRepo.save(newUser);
     }
 
     @Override
