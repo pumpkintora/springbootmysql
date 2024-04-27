@@ -7,10 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication(exclude = {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class})
 public class SpringbootmysqlApplication {
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootmysqlApplication.class, args);
 	}
