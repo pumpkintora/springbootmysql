@@ -25,7 +25,7 @@ public class WebSocketController {
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public void handleChatMessage(@Payload String message) {
+    public void sendMessage(@Payload String message) {
         // Send the message to Kafka
         kafkaProducerService.sendMessage("my-topic", message);
     }
