@@ -1,5 +1,6 @@
 package com.rk.springbootmysql.model.user;
 
+import com.rk.springbootmysql.model.chat.ChatRoom;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,7 +26,7 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username")
@@ -33,7 +37,7 @@ public class User {
 
     private String password;
 
-    @Column(name = "telephone_mobile")
-    private String telephoneMobile;
+    @ManyToMany(mappedBy = "users")
+    private Set<ChatRoom> chatRooms = new HashSet<>();
 }
 
