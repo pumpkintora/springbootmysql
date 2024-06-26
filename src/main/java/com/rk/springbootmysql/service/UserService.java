@@ -1,15 +1,14 @@
 package com.rk.springbootmysql.service;
-import com.rk.springbootmysql.dto.SignUpRequest;
+import com.rk.springbootmysql.dto.auth.SignUpRequest;
+import com.rk.springbootmysql.dto.user.UserDTO;
 import com.rk.springbootmysql.model.user.User;
-import jakarta.validation.Valid;
 
 public interface UserService {
 
     void signup(SignUpRequest requestDto) throws Exception;
 
     User findUserByEmail(String email);
-
-    User findUserByMobile(String mobileTelephone);
+    void authenticateUser(String email, String password);
 
     User updateProfile(User user);
 

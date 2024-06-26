@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.nio.file.AccessDeniedException;
@@ -14,9 +15,10 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+
 public class JwtHelper {
 
-    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final String SECRET_KEY = "690a32ae642d30f0d9917669f3debb2bfc4a7ce3b706e2bd81231c4f748de315aa1bb4d868889026e7978fa2165a94e9479a27159b7c8875ce175959b988208af79bca0543ee7a65159e0a1d939892b6e0dd8791e0223a3e02e6c994392ffa51e543a4739bd6b590534b2dca83b9de73de6214efd470e7e7e7a1e11fd95aaede";
     private static final int MINUTES = 60;
 
     public static String generateToken(String email) {
@@ -44,7 +46,7 @@ public class JwtHelper {
                     .parserBuilder()
                     .setSigningKey(SECRET_KEY)
                     .build()
-                    .parseClaimsJwt(token)
+                    .parseClaimsJws(token)
                     .getBody();
 
         } catch (SignatureException | ExpiredJwtException e) { // Invalid signature or expired token

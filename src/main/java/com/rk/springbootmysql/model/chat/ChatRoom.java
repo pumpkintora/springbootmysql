@@ -1,6 +1,7 @@
 package com.rk.springbootmysql.model.chat;
 import com.rk.springbootmysql.model.user.User;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,18 +11,31 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "chat_rooms")
+@Table
 public class ChatRoom {
     // Getters and setters
     @Id
-    private Long chatRoomId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long chatroomId;
+
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "chatroom_users",
-            joinColumns = @JoinColumn(name = "chatroom_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            name = "chatroom_user",
+            joinColumns = @JoinColumn(name = "chatroom_id", referencedColumnName = "chatroomId"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId")
     )
     private Set<User> users = new HashSet<>();
+
+    // Default constructor
+    public ChatRoom() {}
+
+    // Getters and setters
+
+
+    public void addUser(User user) {
+        this.users.add(user);
+        user.getChatrooms().add(this);
+    }
 }

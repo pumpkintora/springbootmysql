@@ -1,7 +1,9 @@
 package com.rk.springbootmysql.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rk.springbootmysql.model.chat.ChatRoom;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,18 +18,11 @@ import java.util.Set;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "user",
-        indexes = @Index(
-                name = "idx_user_email",
-                columnList = "email",
-                unique = true
-        ))
+@Table
 public class User {
-
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     @Column(name = "username")
     private String username;
@@ -38,6 +33,7 @@ public class User {
     private String password;
 
     @ManyToMany(mappedBy = "users")
-    private Set<ChatRoom> chatRooms = new HashSet<>();
+    @JsonIgnore
+    private Set<ChatRoom> chatrooms = new HashSet<>();
 }
 
