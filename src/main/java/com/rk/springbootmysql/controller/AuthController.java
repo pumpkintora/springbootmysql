@@ -43,10 +43,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         userService.authenticateUser(request.email(), request.password());
         User user = userService.findUserByEmail(request.email());
-        UserDTO userDTO = new UserDTO(user.getUsername(), user.getEmail());
+        UserDTO userDTO = new UserDTO(user.getUserId(), user.getUsername(), user.getEmail());
         String accessToken = JwtHelper.generateToken(request.email());
         return ResponseEntity.ok(new LoginResponse(userDTO, accessToken));
     }

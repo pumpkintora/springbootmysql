@@ -33,7 +33,6 @@ public class User {
     private String password;
 
     @ManyToMany(mappedBy = "users")
-    @JsonIgnore
     private Set<ChatRoom> chatrooms = new HashSet<>();
 }
 
