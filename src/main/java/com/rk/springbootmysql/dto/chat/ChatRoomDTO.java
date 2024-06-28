@@ -27,20 +27,4 @@ public class ChatRoomDTO {
             this.users.add(u);
         }
     }
-
-//    public ChatRoomDTO(ChatRoom chatRoom, Boolean withUser) {
-//        this.chatroomId = chatRoom.getChatroomId();
-//        this.name = chatRoom.getName();
-//        if (withUser) {
-//            for (User user : chatRoom.getUsers()) {
-//                UserDTO u = new UserDTO();
-//                u.setUserId(user.getUserId());
-//                u.setUsername(user.getUsername());
-//                u.setEmail(user.getEmail());
-//                this.users.add(u);
-//            }
-//        } else {
-//
-//        }
-//    }
 }
