@@ -7,13 +7,14 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@Slf4j
+@CrossOrigin
 public class WebSocketController {
     
     private final KafkaProducerService kafkaProducerService;
@@ -28,6 +29,10 @@ public class WebSocketController {
     public void sendMessage(@Payload String message) {
         // Send the message to Kafka
         kafkaProducerService.sendMessage("my-topic", message);
+    }
+
+    public void listen(String message) {
+        kafkaConsumerService.listen(message);
     }
 
 //    @MessageMapping("/chat.addUser")
@@ -52,8 +57,8 @@ public class WebSocketController {
 //            log.error("headerAccessor or session attributes is null.");
 //        }
 //    }
-    @GetMapping("/api/chat")
-    public List<String> getChatMessages() {
-        return kafkaConsumerService.getChatMessages();
-    }
+//    @GetMapping("/api/chat")
+//    public List<String> getChatMessages() {
+//        return kafkaConsumerService.getChatMessages();
+//    }
 }
