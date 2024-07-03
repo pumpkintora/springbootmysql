@@ -1,23 +1,30 @@
 package com.rk.springbootmysql.model.chat;
 
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.rk.springbootmysql.model.user.User;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.awt.*;
 import java.time.LocalDateTime;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table
 public class ChatMessage {
     @Id
-    private Long messageId;
-    private Long userId;
-    private Long chatRoomId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long chatmessageId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "chatroom_id", referencedColumnName = "chatroomId")
+    private ChatRoom chatroom;
+
     private String content;
+
     private LocalDateTime timestamp;
 }

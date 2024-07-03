@@ -1,6 +1,7 @@
 package com.rk.springbootmysql.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rk.springbootmysql.model.chat.ChatMessage;
 import com.rk.springbootmysql.model.chat.ChatRoom;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -33,6 +34,9 @@ public class User {
     private String password;
 
     @ManyToMany(mappedBy = "users")
-    private Set<ChatRoom> chatrooms = new HashSet<>();
+    private Set<ChatRoom> chatrooms;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ChatMessage> chatmessages;
 }
 

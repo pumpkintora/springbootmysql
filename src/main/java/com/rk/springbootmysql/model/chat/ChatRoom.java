@@ -26,7 +26,10 @@ public class ChatRoom {
             joinColumns = @JoinColumn(name = "chatroom_id", referencedColumnName = "chatroomId"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId")
     )
-    private Set<User> users = new HashSet<>();
+    private Set<User> users;
+
+    @OneToMany(mappedBy = "chatroom")
+    private Set<ChatMessage> chatMessages;
 
     // Default constructor
     public ChatRoom() {}
