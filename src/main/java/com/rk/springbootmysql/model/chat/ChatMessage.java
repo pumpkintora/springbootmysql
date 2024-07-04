@@ -3,12 +3,15 @@ package com.rk.springbootmysql.model.chat;
 import com.rk.springbootmysql.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.awt.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Accessors(chain = true)
+@NoArgsConstructor
 @Entity
 @Table
 public class ChatMessage {
@@ -27,4 +30,5 @@ public class ChatMessage {
     private String content;
 
     private LocalDateTime timestamp;
+
 }

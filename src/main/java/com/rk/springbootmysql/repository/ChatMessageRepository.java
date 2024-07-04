@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ChatMessageRepository extends JpaRepository<ChatRoom, Long> {
+public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
 
     @Query("SELECT cm FROM ChatMessage cm JOIN cm.user u WHERE u.id = :userId")
     List<ChatMessage> findByUserId(@Param("userId") Long userId);
