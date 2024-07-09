@@ -25,8 +25,8 @@ public class ChatMessageDTO {
     private LocalDateTime timestamp;
     public ChatMessageDTO(ChatMessage chatMessage) {
         this.chatmessageId = chatMessage.getChatmessageId();
-        this.chatroomId = chatMessage.getChatroom().getChatroomId();
         this.userId = chatMessage.getUser().getUserId();
+        this.content = chatMessage.getContent();
         this.timestamp = chatMessage.getTimestamp();
     }
 
@@ -34,9 +34,8 @@ public class ChatMessageDTO {
     public String toString() {
         return "{chatmessageId:" + this.getChatmessageId() +
                 "userId:" + this.getUserId() +
-                "chatroomId:" + this.getChatroomId() +
                 "content:" + this.getContent() +
-//                "timestamp" + this.getTimestamp().toString() +
+                "timestamp" + this.getTimestamp().toString() +
                 "}";
     }
 }

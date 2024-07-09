@@ -1,6 +1,7 @@
 package com.rk.springbootmysql.controller;
 
 import com.rk.springbootmysql.dto.chat.ChatRoomDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import com.rk.springbootmysql.model.chat.ChatRoom;
 import com.rk.springbootmysql.model.user.User;
@@ -18,7 +19,9 @@ import org.slf4j.LoggerFactory;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/chatroom")
+@Slf4j
 public class ChatRoomController {
+
     private static final Logger logger = LoggerFactory.getLogger(ChatRoomController.class);
     @Autowired
     private ChatRoomService chatRoomService;
@@ -40,24 +43,13 @@ public class ChatRoomController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<?>> getChatRoomsByUserId(@PathVariable Long userId, @RequestParam Boolean withUser) {
+    public ResponseEntity<List<?>> getChatRoomsByUserId(@PathVariable Long userId) {
         List<ChatRoom> chatRooms = chatRoomService.getChatRoomsByUserId(userId);
-        if (withUser) {
-            List<ChatRoomDTO> crDTO = new ArrayList<>();
-            for (ChatRoom cr : chatRooms) {
-                crDTO.add(new ChatRoomDTO(cr));
-            }
-            return ResponseEntity.ok(crDTO);
-        } else {
-            List<Map<String, Object>> crDTO = new ArrayList<Map<String, Object>>();
-            for (ChatRoom cr : chatRooms) {
-                Map<String, Object> obj = new HashMap<>();
-                obj.put("chatroomId", cr.getChatroomId());
-                obj.put("name", cr.getName());
-                crDTO.add(obj);
-            }
-            return ResponseEntity.ok(crDTO);
+        List<ChatRoomDTO> crDTO = new ArrayList<>();
+        for (ChatRoom cr : chatRooms) {
+            crDTO.add(new ChatRoomDTO(cr));
         }
+        return ResponseEntity.ok(crDTO);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
