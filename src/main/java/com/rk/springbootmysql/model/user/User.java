@@ -1,17 +1,12 @@
 package com.rk.springbootmysql.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rk.springbootmysql.model.chat.ChatMessage;
 import com.rk.springbootmysql.model.chat.ChatRoom;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter

@@ -26,21 +26,18 @@ public class UserServiceImpl implements UserService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public void signup(SignUpRequest request) throws Exception {
-        User checkUser = userRepo.findByEmail(request.email());
-        if (checkUser != null) {
-            throw new Exception(String.format("User with the email address '%s' already exists.", request.email()));
-        }
+    public void createUser(String username, String email, String password) {
         User newUser = new User()
-                .setEmail(request.email())
-                .setPassword(bCryptPasswordEncoder.encode(request.password()))
-                .setUsername(request.username());
+                .setEmail(email)
+                .setPassword(bCryptPasswordEncoder.encode(password))
+                .setUsername(username);
         userRepo.save(newUser);
     }
 
     @Override
-    public void authenticateUser(String email, String password) {
+    public boolean authenticateUser(String email, String password) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+        return authentication.isAuthenticated();
     }
 
     @Override

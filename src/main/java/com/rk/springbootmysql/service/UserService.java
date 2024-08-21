@@ -5,10 +5,10 @@ import com.rk.springbootmysql.model.user.User;
 
 public interface UserService {
 
-    void signup(SignUpRequest requestDto) throws Exception;
+    void createUser(String username, String email, String password);
 
     User findUserByEmail(String email);
-    void authenticateUser(String email, String password);
+    boolean authenticateUser(String email, String password);
 
     User updateProfile(User user);
 
